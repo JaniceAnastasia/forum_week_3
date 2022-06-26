@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node{
+  int data;
+  struct Node* next;
+  struct Node* prev;
+};
+ 
+struct Node* addToEmpty (struct Node* head, int data){
+  struct Node* temp = malloc(sizeof(struct Node));
+  temp-> prev = NULL;
+  temp-> data = data;
+  temp-> next = NULL;
+  head = temp;
+  return head;
+}
+
+struct Node* addAtEnd (struct Node* head, int data){
+  struct Node* temp, *tp;
+  temp = malloc (sizeof(struct Node));
+  temp-> prev = NULL;
+  temp-> data = data;
+  temp-> next = NULL;
+  tp = head;
+  while (tp->next ! = NULL)
+    tp = tp-> next;
+  tp-> next = temp;
+  temp-> prev = tp;
+  return head;
+}
+
+struct Node* delLast (struct Node* head){
+  struct Node* temp = head;
+  struct Node* temp2;
+  while (temp-> next ! NULL)
+    temp = temp-> next;
+  temp2 = temp-> prev;
+  temp2-> next = NULL;
+  free(temp);
+  return head;
+}
+
+void print (struct Node* head){
+  struct Node* ptr = head;
+  while (ptr ! = NULL){
+    printf("%d", ptr-> data);
+    ptr = ptr-> next;
+  }
+  printf("\n");
+}
+
+int main(){
+  struct Node* head = NULL;
+  struct Node* ptr;
+  head = addToEmpty (head, 23);
+  head = addToEmpty (head, 45);
+  head = addToEmpty (head, 79);
+  head = addToEmpty (head, 3);
+  head = addToEmpty (head, 47);
+  head = addToEmpty (head, 11);
+  head = addToEmpty (head, 92);
+  head = addToEmpty (head, 60);
+  head = addToEmpty (head, 39);
+  head = addToEmpty (head, 28);
+  head = addToEmpty (head, 6);
+  head = addToEmpty (head, 72);
+  head = addAtEnd (head, 13);
+  head = addAtEnd (head, 28);
+  
+  printf("Before Deletion: \n");
+  print(head);
+  
+  head = delLast(head);
+  printf("After Deletion: \n);
+  print(head);
+  return 0;
+}
+  
+  
